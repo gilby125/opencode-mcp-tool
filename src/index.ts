@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { Command } from "commander";
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
@@ -26,6 +27,14 @@ import {
   toolExists, 
   getPromptMessage 
 } from "./tools/index.js";
+
+// Global configuration for model settings
+export interface ServerConfig {
+  primaryModel: string;
+  fallbackModel?: string;
+}
+
+let serverConfig: ServerConfig;
 
 const server = new Server(
   {
@@ -250,9 +259,42 @@ server.setRequestHandler(GetPromptRequestSchema, async (request: GetPromptReques
   };
 });
 
-// Start the server
+// Setup CLI arguments and start the server
 async function main() {
-  Logger.debug("init gemini-mcp-tool");
-  const transport = new StdioServerTransport(); await server.connect(transport);
-  Logger.debug("gemini-mcp-tool listening on stdio");
-} main().catch((error) => {Logger.error("Fatal error:", error); process.exit(1); }); 
+  const program = new Command();
+  
+  program
+    .name("opencode-mcp")
+    .description("MCP server for OpenCode CLI integration")
+    .version("1.1.4")
+    .requiredOption("-m, --model <model>", "Primary model to use (e.g., google/gemini-2.5-pro)")
+    .option("-f, --fallback-model <model>", "Fallback model for quota/error situations")
+    .parse();
+
+  const options = program.opts();
+  
+  // Store server configuration globally
+  serverConfig = {
+    primaryModel: options.model,
+    fallbackModel: options.fallbackModel
+  };
+  
+  Logger.debug("init opencode-mcp-tool with model:", serverConfig.primaryModel);
+  if (serverConfig.fallbackModel) {
+    Logger.debug("fallback model:", serverConfig.fallbackModel);
+  }
+  
+  const transport = new StdioServerTransport(); 
+  await server.connect(transport);
+  Logger.debug("opencode-mcp-tool listening on stdio");
+}
+
+// Export server config for use in tools
+export function getServerConfig(): ServerConfig {
+  return serverConfig;
+}
+
+main().catch((error) => {
+  Logger.error("Fatal error:", error); 
+  process.exit(1); 
+}); 
