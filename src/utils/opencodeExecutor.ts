@@ -3,22 +3,23 @@ import { Logger } from './logger.js';
 import { 
   ERROR_MESSAGES, 
   STATUS_MESSAGES, 
-  MODELS, 
   CLI
 } from '../constants.js';
+import { getServerConfig } from '../index.js';
 
 import { parseChangeModeOutput, validateChangeModeEdits } from './changeModeParser.js';
 import { formatChangeModeResponse, summarizeChangeModeEdits } from './changeModeTranslator.js';
 import { chunkChangeModeEdits } from './changeModeChunker.js';
 import { cacheChunks, getChunks } from './chunkCache.js';
 
-export async function executeGeminiCLI(
+export async function executeOpenCodeCLI(
   prompt: string,
   model?: string,
-  sandbox?: boolean,
+  planMode?: boolean,
   changeMode?: boolean,
   onProgress?: (newOutput: string) => void
 ): Promise<string> {
+  const serverConfig = getServerConfig();
   let prompt_processed = prompt;
   
   if (changeMode) {
@@ -87,44 +88,44 @@ ${prompt_processed}
     prompt_processed = changeModeInstructions;
   }
   
-  const args = [];
-  if (model) { args.push(CLI.FLAGS.MODEL, model); }
-  if (sandbox) { args.push(CLI.FLAGS.SANDBOX); }
+  const args = [CLI.SUBCOMMANDS.RUN];
   
-  // Ensure @ symbols work cross-platform by wrapping in quotes if needed
-  const finalPrompt = prompt_processed.includes('@') && !prompt_processed.startsWith('"') 
-    ? `"${prompt_processed}"` 
-    : prompt_processed;
-    
-  args.push(CLI.FLAGS.PROMPT, finalPrompt);
+  // Use model from parameter or server config
+  const useModel = model || serverConfig.primaryModel;
+  args.push(CLI.FLAGS.MODEL, useModel);
+  
+  if (planMode) { 
+    args.push(CLI.FLAGS.MODE, CLI.MODES.PLAN); 
+  }
+  
+  // Add prompt as positional argument (no -p flag in opencode)
+  args.push(prompt_processed);
   
   try {
-    return await executeCommand(CLI.COMMANDS.GEMINI, args, onProgress);
+    return await executeCommand(CLI.COMMANDS.OPENCODE, args, onProgress);
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
-    if (errorMessage.includes(ERROR_MESSAGES.QUOTA_EXCEEDED) && model !== MODELS.FLASH) {
-      Logger.warn(`${ERROR_MESSAGES.QUOTA_EXCEEDED}. Falling back to ${MODELS.FLASH}.`);
-      await sendStatusMessage(STATUS_MESSAGES.FLASH_RETRY);
-      const fallbackArgs = [];
-      fallbackArgs.push(CLI.FLAGS.MODEL, MODELS.FLASH);
-      if (sandbox) {
-        fallbackArgs.push(CLI.FLAGS.SANDBOX);
+    if (errorMessage.toLowerCase().includes(ERROR_MESSAGES.QUOTA_EXCEEDED) && serverConfig.fallbackModel) {
+      Logger.warn(`${ERROR_MESSAGES.QUOTA_EXCEEDED_SHORT} Trying fallback model: ${serverConfig.fallbackModel}`);
+      await sendStatusMessage(STATUS_MESSAGES.FALLBACK_RETRY);
+      
+      const fallbackArgs = [CLI.SUBCOMMANDS.RUN];
+      fallbackArgs.push(CLI.FLAGS.MODEL, serverConfig.fallbackModel);
+      
+      if (planMode) {
+        fallbackArgs.push(CLI.FLAGS.MODE, CLI.MODES.PLAN);
       }
       
-      // Same @ symbol handling for fallback
-      const fallbackPrompt = prompt_processed.includes('@') && !prompt_processed.startsWith('"') 
-        ? `"${prompt_processed}"` 
-        : prompt_processed;
-        
-      fallbackArgs.push(CLI.FLAGS.PROMPT, fallbackPrompt);
+      fallbackArgs.push(prompt_processed);
+      
       try {
-        const result = await executeCommand(CLI.COMMANDS.GEMINI, fallbackArgs, onProgress);
-        Logger.warn(`Successfully executed with ${MODELS.FLASH} fallback.`);
-        await sendStatusMessage(STATUS_MESSAGES.FLASH_SUCCESS);
+        const result = await executeCommand(CLI.COMMANDS.OPENCODE, fallbackArgs, onProgress);
+        Logger.warn(`Successfully executed with fallback model: ${serverConfig.fallbackModel}`);
+        await sendStatusMessage(STATUS_MESSAGES.FALLBACK_SUCCESS);
         return result;
       } catch (fallbackError) {
         const fallbackErrorMessage = fallbackError instanceof Error ? fallbackError.message : String(fallbackError);
-        throw new Error(`${MODELS.PRO} quota exceeded, ${MODELS.FLASH} fallback also failed: ${fallbackErrorMessage}`);
+        throw new Error(`Primary model failed, fallback model also failed: ${fallbackErrorMessage}`);
       }
     } else {
       throw error;
@@ -164,7 +165,7 @@ export async function processChangeModeOutput(
   const edits = parseChangeModeOutput(rawResult);
   
   if (edits.length === 0) {
-    return `No edits found in Gemini's response. Please ensure Gemini uses the OLD/NEW format. \n\n+ ${rawResult}`;
+    return `No edits found in OpenCode's response. Please ensure OpenCode uses the OLD/NEW format. \n\n+ ${rawResult}`;
   }
 
   // Validate edits

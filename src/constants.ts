@@ -1,33 +1,35 @@
 
 
 // Logging
-export const LOG_PREFIX = "[GMCPT]";
+export const LOG_PREFIX = "[OMCPT]";
 
 // Error messages
 export const ERROR_MESSAGES = {
-  QUOTA_EXCEEDED: "Quota exceeded for quota metric 'Gemini 2.5 Pro Requests'",
-  QUOTA_EXCEEDED_SHORT: "⚠️ Gemini 2.5 Pro daily quota exceeded. Please retry with model: 'gemini-2.5-flash'",
+  QUOTA_EXCEEDED: "quota exceeded",
+  QUOTA_EXCEEDED_SHORT: "⚠️ Model quota exceeded. Switching to fallback model if available.",
   TOOL_NOT_FOUND: "not found in registry",
   NO_PROMPT_PROVIDED: "Please provide a prompt for analysis. Use @ syntax to include files (e.g., '@largefile.js explain what this does') or ask general questions",
 } as const;
 
 // Status messages
 export const STATUS_MESSAGES = {
-  QUOTA_SWITCHING: "🚫 Gemini 2.5 Pro quota exceeded, switching to Flash model...",
-  FLASH_RETRY: "⚡ Retrying with Gemini 2.5 Flash...",
-  FLASH_SUCCESS: "✅ Flash model completed successfully",
-  SANDBOX_EXECUTING: "🔒 Executing Gemini CLI command in sandbox mode...",
-  GEMINI_RESPONSE: "Gemini response:",
+  QUOTA_SWITCHING: "🚫 Model quota exceeded, switching to fallback model...",
+  FALLBACK_RETRY: "⚡ Retrying with fallback model...",
+  FALLBACK_SUCCESS: "✅ Fallback model completed successfully",
+  PLAN_MODE_EXECUTING: "📋 Executing OpenCode command in plan mode...",
+  OPENCODE_RESPONSE: "OpenCode response:",
   // Timeout prevention messages
   PROCESSING_START: "🔍 Starting analysis (may take 5-15 minutes for large codebases)",
-  PROCESSING_CONTINUE: "⏳ Still processing... Gemini is working on your request",
+  PROCESSING_CONTINUE: "⏳ Still processing... OpenCode is working on your request",
   PROCESSING_COMPLETE: "✅ Analysis completed successfully",
 } as const;
 
-// Models
+// Models - Note: These are examples, actual models are provided via CLI args
 export const MODELS = {
-  PRO: "gemini-2.5-pro",
-  FLASH: "gemini-2.5-flash",
+  // Common model examples - server will use CLI-provided models
+  GOOGLE_PRO: "google/gemini-2.5-pro",
+  GOOGLE_FLASH: "google/gemini-2.5-flash",
+  ANTHROPIC_SONNET: "anthropic/claude-3-5-sonnet-20241022",
 } as const;
 
 // MCP Protocol Constants
@@ -61,19 +63,25 @@ export const PROTOCOL = {
 export const CLI = {
   // Command names
   COMMANDS: {
-    GEMINI: "gemini",
+    OPENCODE: "opencode",
     ECHO: "echo",
+  },
+  // Subcommands
+  SUBCOMMANDS: {
+    RUN: "run",
   },
   // Command flags
   FLAGS: {
     MODEL: "-m",
-    SANDBOX: "-s",
-    PROMPT: "-p",
-    HELP: "-help",
+    MODE: "--mode",
+    HELP: "--help",
+  },
+  // Mode values
+  MODES: {
+    PLAN: "plan",
   },
   // Default values
   DEFAULTS: {
-    MODEL: "default", // Fallback model used when no specific model is provided
     BOOLEAN_TRUE: "true",
     BOOLEAN_FALSE: "false",
   },
@@ -84,7 +92,7 @@ export const CLI = {
 export interface ToolArguments {
   prompt?: string;
   model?: string;
-  sandbox?: boolean | string;
+  planMode?: boolean | string; // Renamed from sandbox
   changeMode?: boolean | string;
   chunkIndex?: number | string; // Which chunk to return (1-based)
   chunkCacheKey?: string; // Optional cache key for continuation
