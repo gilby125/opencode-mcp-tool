@@ -88,7 +88,7 @@ ${prompt_processed}
     prompt_processed = changeModeInstructions;
   }
   
-  const args = [CLI.SUBCOMMANDS.RUN];
+  const args: string[] = [CLI.SUBCOMMANDS.RUN];
   
   // Use model from parameter or server config
   const useModel = model || serverConfig.primaryModel;
@@ -109,7 +109,7 @@ ${prompt_processed}
       Logger.warn(`${ERROR_MESSAGES.QUOTA_EXCEEDED_SHORT} Trying fallback model: ${serverConfig.fallbackModel}`);
       await sendStatusMessage(STATUS_MESSAGES.FALLBACK_RETRY);
       
-      const fallbackArgs = [CLI.SUBCOMMANDS.RUN];
+      const fallbackArgs: string[] = [CLI.SUBCOMMANDS.RUN];
       fallbackArgs.push(CLI.FLAGS.MODEL, serverConfig.fallbackModel);
       
       if (planMode) {

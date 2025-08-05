@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { UnifiedTool } from './registry.js';
 import { Logger } from '../utils/logger.js';
-import { executeGeminiCLI } from '../utils/geminiExecutor.js';
+import { executeOpenCodeCLI } from '../utils/opencodeExecutor.js';
 
 function buildBrainstormPrompt(config: {
   prompt: string;
@@ -133,7 +133,7 @@ export const brainstormTool: UnifiedTool = {
   prompt: {
     description: "Generate structured brainstorming prompt with methodology-driven ideation, domain context integration, and analytical evaluation framework",
   },
-  category: 'gemini',
+  category: 'opencode',
   execute: async (args, onProgress) => {
     const {
       prompt,
@@ -166,6 +166,6 @@ export const brainstormTool: UnifiedTool = {
     onProgress?.(`Generating ${ideaCount} ideas via ${methodology} methodology...`);
     
     // Execute with Gemini
-    return await executeGeminiCLI(enhancedPrompt, model as string | undefined, false, false, onProgress);
+    return await executeOpenCodeCLI(enhancedPrompt, model as string | undefined, false, false, onProgress);
   }
 };
