@@ -13,40 +13,15 @@ Claude automatically decides when to use `ask-opencode` based on context:
 
 This intelligent selection enhances your workflow exactly when OpenCode's capabilities add value.
 
-<div align="center">⇣ when ask-opencode gets called ↴</div>
-<DiagramModal>
+## Workflow Diagram
 
-```mermaid
----
-config:
-  flowchart:
-    htmlLabels: false
-    curve: cardinal
----
-flowchart LR
-    subgraph main
-        direction TB
-        A[You] --> |"ask opencode..."| B([**Claude**])
-        B -..-> |"invokes 'ask-opencode'"| C["OpenCode-MCP-Tool"]
-        C --> |"spawn!"| D[OpenCode-CLI]
-        D e1@-.-> |"response"| C
-        C -.-> |"response"| B
-        B -.-> |"summary response"| A
-        e1@{ animate: true }
-    end
-    subgraph Project
-        B --> |"edits"| E["`**@*Files***`"]
-        D -.-> |"reads"| E
-    end
-    classDef userNode fill:#1a237e,stroke:#fff,color:#fff,stroke-width:2px
-    classDef claudeNode fill:#e64100,stroke:#fff,color:#fff,stroke-width:2px
-    classDef openCodeNode fill:#4285f4,stroke:#fff,color:#fff,stroke-width:2px
-    classDef mcpNode fill:#37474f,stroke:#fff,color:#fff,stroke-width:2px
-    classDef dataNode fill:#1b5e20,stroke:#fff,color:#fff,stroke-width:2px
-    class A userNode
-    class B claudeNode
-    class C mcpNode
-    class D openCodeNode
-    class E dataNode
 ```
-</DiagramModal>
+You → "ask opencode..." → Claude
+Claude → invokes 'ask-opencode' → OpenCode-MCP-Tool
+OpenCode-MCP-Tool → spawn! → OpenCode-CLI
+OpenCode-CLI → reads → @Files
+OpenCode-CLI → response → OpenCode-MCP-Tool
+OpenCode-MCP-Tool → response → Claude
+Claude → summary response → You
+Claude → edits → @Files
+```

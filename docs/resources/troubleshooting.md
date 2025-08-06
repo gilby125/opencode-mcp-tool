@@ -1,18 +1,14 @@
 # Troubleshooting
 
-Common issues and their solutions. Click any issue below to see the detailed solution.
-
-<script setup>
-import TroubleshootingModal from '../.vitepress/components/TroubleshootingModal.vue'
-</script>
+Common issues and their solutions.
 
 ## Installation Issues
 
-<TroubleshootingModal
-title='"Command not found: opencode"'
-preview="The OpenCode CLI is not installed or not in your PATH"
+### "Command not found: opencode"
 
->
+**Problem**: The OpenCode CLI is not installed or not in your PATH
+
+**Solution**:
 
 The OpenCode CLI is not installed. Install it first:
 
@@ -28,13 +24,7 @@ opencode --version
 
 If you still get "command not found", restart your terminal or add npm global bin to your PATH.
 
-</TroubleshootingModal>
-
-<TroubleshootingModal
-title="Windows NPX Installation Issues"
-preview='Error: unknown option "-y" when using Claude Code on Windows'
-
->
+### Windows NPX Installation Issues
 
 **Problem**: `error: unknown option '-y'` when using Claude Code on Windows
 
@@ -52,13 +42,9 @@ claude mcp add opencode -- npx --yes opencode-mcp-tool
 claude mcp add opencode -- npx opencode-mcp-tool
 ```
 
-</TroubleshootingModal>
+### "MCP server not responding"
 
-<TroubleshootingModal
-title='"MCP server not responding"'
-preview="Claude Desktop can't connect to the MCP server"
-
->
+**Problem**: Claude Desktop can't connect to the MCP server
 
 **Step-by-step solution**:
 
@@ -79,13 +65,9 @@ preview="Claude Desktop can't connect to the MCP server"
    - macOS: `~/Library/Logs/Claude/`
    - Windows: `%APPDATA%\Claude\logs\`
 
-</TroubleshootingModal>
+### "MCP error -32000: Connection closed"
 
-<TroubleshootingModal
-title='"MCP error -32000: Connection closed"'
-preview="Server fails to start and connection closes immediately (Claude Code)"
-
->
+**Problem**: Server fails to start and connection closes immediately (Claude Code)
 
 **Common causes**:
 
@@ -115,8 +97,6 @@ claude mcp list
 
 - macOS: `~/Library/Logs/Claude/`
 - Windows: `%APPDATA%\Claude\logs\`
-
-</TroubleshootingModal>
 
 ### "OpenCode gets cut off" / Early Termination
 

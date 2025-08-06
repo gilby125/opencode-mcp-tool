@@ -9,11 +9,6 @@ dist/
 .idea/
 .npmignore
 
-
-# Docs Site
-docs/.vitepress/cache/
-docs/.vitepress/dist/
-
 # Desktop Extension build artifacts
 *.dxt
 extension-build/

@@ -1,29 +1,18 @@
-## Getting Started
+# Getting Started
 
-<div align="center">⇣ Find your setup ↴</div>
+## Client Options
 
-<ClientGrid>
-  <div class="client-card client-card--recommended claude-code-card">
-    <h3><span class="snowflake">❋</span> Claude Code</h3>
-    <div class="client-badge">Power Users</div>
-    <p>One-command setup</p>
-    <a href="#claude-code-recommended" class="client-button">Get Started →</a>
-  </div>
-  
-  <div class="client-card">
-    <h3>🖥️ <br>Claude Desktop</h3>
-    <div class="client-badge">Everyday users</div>
-    <p>JSON configuration</p>
-    <a href="#claude-desktop" class="client-button">Setup Guide →</a>
-  </div>
-  
-  <div class="client-card">
-    <h3>📂 Other Clients</h3>
-    <div class="client-badge">40+ Options</div>
-    <p>Warp, Copilot, and More</p>
-    <a href="#other-mcp-clients" class="client-button">More →</a>
-  </div>
-</ClientGrid>
+### ❋ Claude Code (Recommended)
+**Power Users** - One-command setup  
+[Get Started →](#claude-code-recommended)
+
+### 🖥️ Claude Desktop  
+**Everyday users** - JSON configuration  
+[Setup Guide →](#claude-desktop)
+
+### 📂 Other Clients
+**40+ Options** - Warp, Copilot, and More  
+[More →](#other-mcp-clients)
 
 ## Client Setup
 
@@ -37,8 +26,9 @@ Before installing, ensure you have:
 
 
 ## Claude Code (Recommended)
-::: warning 💡 opencode-mcp-tool is tested extensively with claude code
-:::
+
+**Note:** opencode-mcp-tool is tested extensively with Claude Code.
+
 Claude Code offers the smoothest experience.
 
 ```bash
@@ -53,15 +43,11 @@ claude
 ---
 #### Configuration File Locations
 
-<ConfigModal>
-
-*Where are my Claude Desktop Config Files?:*
+**Where are my Claude Desktop Config Files?**
 
 - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 - **Linux**: `~/.config/claude/claude_desktop_config.json`
-
-</ConfigModal>
 
 ---
 
@@ -78,9 +64,7 @@ For Claude Desktop users, add this to your configuration file:
 }
 ```
 
-::: warning
-You must restart Claude Desktop ***completely*** for changes to take effect.
-:::
+**Important:** You must restart Claude Desktop completely for changes to take effect.
 ## Other MCP Clients
 
 OpenCode MCP Tool works with 40+ MCP clients! Here are the common configuration patterns:
@@ -167,11 +151,10 @@ Type `/opencode` and these commands will appear:
 
 Don't see your MCP client listed? OpenCode MCP Tool uses standard MCP protocol and works with any compatible client.
 
-::: tip Find More MCP Clients
+**Find More MCP Clients:**
 - **Official List**: [modelcontextprotocol.io/clients](https://modelcontextprotocol.io/clients)
 - **Configuration Help**: Most clients follow the STDIO transport pattern above
 - **Community**: Join discussions on GitHub for client-specific tips
-:::
 
 ## Common Issues
 
@@ -202,6 +185,4 @@ Now that you're set up:
 - Check out real-world examples in the README
 - Join the community for support
 
-::: info Need Help?
-If you run into issues, [open an issue](https://github.com/frap129/opencode-mcp-tool/issues) on GitHub.
-:::
+**Need Help?** If you run into issues, [open an issue](https://github.com/frap129/opencode-mcp-tool/issues) on GitHub.

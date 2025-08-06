@@ -11,7 +11,7 @@
 
 </div>
 
-> 📚 **[View Full Documentation](https://frap129.github.io/opencode-mcp-tool/)** - Examples, FAQ, Troubleshooting, Best Practices
+> 📚 **Documentation Available in docs/ folder** - Examples, FAQ, Troubleshooting, Best Practices
 
 This is a Model Context Protocol (MCP) server that allows AI assistants to interact with the [OpenCode CLI](https://github.com/fictiverse/opencode). It enables AI assistants to leverage multiple AI models through a unified interface, with features like plan mode for structured thinking and extensive model selection.
 
