@@ -20,10 +20,10 @@ export async function executeCommand(
     let stderr = "";
     let isResolved = false;
     let lastReportedLength = 0;
-    
+
     childProcess.stdout.on("data", (data) => {
       stdout += data.toString();
-      
+
       // Report new content if callback provided
       if (onProgress && stdout.length > lastReportedLength) {
         const newContent = stdout.substring(lastReportedLength);

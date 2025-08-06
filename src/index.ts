@@ -20,12 +20,12 @@ import {
 import { Logger } from "./utils/logger.js";
 import { PROTOCOL, ToolArguments } from "./constants.js";
 
-import { 
-  getToolDefinitions, 
-  getPromptDefinitions, 
-  executeTool, 
-  toolExists, 
-  getPromptMessage 
+import {
+  getToolDefinitions,
+  getPromptDefinitions,
+  executeTool,
+  toolExists,
+  getPromptMessage
 } from "./tools/index.js";
 
 // Global configuration for model settings
@@ -40,14 +40,14 @@ const server = new Server(
   {
     name: "opencode-mcp",
     version: "1.1.4",
-  },{
-    capabilities: {
-      tools: {},
-      prompts: {},
-      notifications: {},
-      logging: {},
-    },
+  }, {
+  capabilities: {
+    tools: {},
+    prompts: {},
+    notifications: {},
+    logging: {},
   },
+},
 );
 
 let isProcessing = false; let currentOperationName = ""; let latestOutput = "";
@@ -73,16 +73,16 @@ async function sendProgressNotification(
   message?: string
 ) {
   if (!progressToken) return; // Only send if client requested progress
-  
+
   try {
     const params: any = {
       progressToken,
       progress
     };
-    
+
     if (total !== undefined) params.total = total; // future cache progress
     if (message) params.message = message;
-    
+
     await server.notification({
       method: PROTOCOL.NOTIFICATIONS.PROGRESS,
       params
@@ -99,7 +99,7 @@ function startProgressUpdates(
   isProcessing = true;
   currentOperationName = operationName;
   latestOutput = ""; // Reset latest output
-  
+
   const progressMessages = [
     `🧠 ${operationName} - OpenCode is analyzing your request...`,
     `📊 ${operationName} - Processing files and generating insights...`,
@@ -107,10 +107,10 @@ function startProgressUpdates(
     `⏱️ ${operationName} - Large analysis in progress (this is normal for big requests)...`,
     `🔍 ${operationName} - Still working... OpenCode takes time for quality results...`,
   ];
-  
+
   let messageIndex = 0;
   let progress = 0;
-  
+
   // Send immediate acknowledgment if progress requested
   if (progressToken) {
     sendProgressNotification(
@@ -120,20 +120,20 @@ function startProgressUpdates(
       `🔍 Starting ${operationName}`
     );
   }
-  
+
   // Keep client alive with periodic updates
   const progressInterval = setInterval(async () => {
     if (isProcessing && progressToken) {
       // Simply increment progress value
       progress += 1;
-      
+
       // Include latest output if available
       const baseMessage = progressMessages[messageIndex % progressMessages.length];
       const outputPreview = latestOutput.slice(-150).trim(); // Last 150 chars
-      const message = outputPreview 
+      const message = outputPreview
         ? `${baseMessage}\n📝 Output: ...${outputPreview}`
         : baseMessage;
-      
+
       await sendProgressNotification(
         progressToken,
         progress,
@@ -145,7 +145,7 @@ function startProgressUpdates(
       clearInterval(progressInterval);
     }
   }, PROTOCOL.KEEPALIVE_INTERVAL); // Every 25 seconds
-  
+
   return { interval: progressInterval, progressToken };
 }
 
@@ -157,7 +157,7 @@ function stopProgressUpdates(
   isProcessing = false;
   currentOperationName = "";
   clearInterval(progressData.interval);
-  
+
   // Send final progress notification if client requested progress
   if (progressData.progressToken) {
     sendProgressNotification(
@@ -181,10 +181,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
   if (toolExists(toolName)) {
     // Check if client requested progress updates
     const progressToken = (request.params as any)._meta?.progressToken;
-    
+
     // Start progress updates if client requested them
     const progressData = startProgressUpdates(toolName, progressToken);
-    
+
     try {
       // Get prompt and other parameters from arguments with proper typing
       const args: ToolArguments = (request.params.arguments as ToolArguments) || {};
@@ -211,7 +211,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request: CallToolRequest)
     } catch (error) {
       // Stop progress updates on error
       stopProgressUpdates(progressData, false);
-      
+
       Logger.error(`Error in tool '${toolName}':`, error);
 
       const errorMessage =
@@ -241,14 +241,14 @@ server.setRequestHandler(ListPromptsRequestSchema, async (request: ListPromptsRe
 server.setRequestHandler(GetPromptRequestSchema, async (request: GetPromptRequest): Promise<GetPromptResult> => {
   const promptName = request.params.name;
   const args = request.params.arguments || {};
-  
+
   const promptMessage = getPromptMessage(promptName, args);
-  
+
   if (!promptMessage) {
     throw new Error(`Unknown prompt: ${promptName}`);
   }
-  
-  return { 
+
+  return {
     messages: [{
       role: "user" as const,
       content: {
@@ -262,7 +262,7 @@ server.setRequestHandler(GetPromptRequestSchema, async (request: GetPromptReques
 // Setup CLI arguments and start the server
 async function main() {
   const program = new Command();
-  
+
   program
     .name("opencode-mcp")
     .description("MCP server for OpenCode CLI integration")
@@ -272,19 +272,19 @@ async function main() {
     .parse();
 
   const options = program.opts();
-  
+
   // Store server configuration globally
   serverConfig = {
     primaryModel: options.model,
     fallbackModel: options.fallbackModel
   };
-  
+
   Logger.debug("init opencode-mcp-tool with model:", serverConfig.primaryModel);
   if (serverConfig.fallbackModel) {
     Logger.debug("fallback model:", serverConfig.fallbackModel);
   }
-  
-  const transport = new StdioServerTransport(); 
+
+  const transport = new StdioServerTransport();
   await server.connect(transport);
   Logger.debug("opencode-mcp-tool listening on stdio");
 }
@@ -295,6 +295,6 @@ export function getServerConfig(): ServerConfig {
 }
 
 main().catch((error) => {
-  Logger.error("Fatal error:", error); 
-  process.exit(1); 
+  Logger.error("Fatal error:", error);
+  process.exit(1);
 }); 

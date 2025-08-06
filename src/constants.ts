@@ -94,7 +94,7 @@ export interface ToolArguments {
   model?: string;
   mode?: string; // Generic mode parameter (plan, build, or custom)
   message?: string; // For Ping tool -- Un-used.
-  
+
   // --> new tool
   methodology?: string; // Brainstorming framework to use
   domain?: string; // Domain context for specialized brainstorming
@@ -102,6 +102,6 @@ export interface ToolArguments {
   existingContext?: string; // Background information to build upon
   ideaCount?: number; // Target number of ideas to generate
   includeAnalysis?: boolean; // Include feasibility and impact analysis
-  
+
   [key: string]: string | boolean | number | undefined; // Allow additional properties
 }

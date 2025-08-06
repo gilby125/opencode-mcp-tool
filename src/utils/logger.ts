@@ -32,7 +32,7 @@ export class Logger {
 
   static commandExecution(command: string, args: string[], startTime: number): void {
     this.warn(`[${startTime}] Starting: ${command} ${args.map((arg) => `"${arg}"`).join(" ")}`);
-    
+
     // Store command execution start for timing analysis
     this._commandStartTimes.set(startTime, { command, args, startTime });
   }

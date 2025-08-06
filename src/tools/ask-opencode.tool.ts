@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { UnifiedTool } from './registry.js';
 import { executeOpenCodeCLI } from '../utils/opencodeExecutor.js';
-import { 
-  ERROR_MESSAGES, 
+import {
+  ERROR_MESSAGES,
   STATUS_MESSAGES
 } from '../constants.js';
 
@@ -21,18 +21,18 @@ export const askOpenCodeTool: UnifiedTool = {
   },
   category: 'opencode',
   execute: async (args, onProgress) => {
-    const { prompt, model, mode } = args; 
-    if (!prompt?.trim()) { 
-      throw new Error(ERROR_MESSAGES.NO_PROMPT_PROVIDED); 
+    const { prompt, model, mode } = args;
+    if (!prompt?.trim()) {
+      throw new Error(ERROR_MESSAGES.NO_PROMPT_PROVIDED);
     }
-    
+
     const result = await executeOpenCodeCLI(
       prompt as string,
       mode as string,
       model as string | undefined,
       onProgress
     );
-    
+
     return `${STATUS_MESSAGES.OPENCODE_RESPONSE}\n${result}`;
   }
 };

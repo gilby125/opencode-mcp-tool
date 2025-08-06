@@ -8,7 +8,7 @@ export interface UnifiedTool {
   name: string;
   description: string;
   zodSchema: ZodTypeAny;
-  
+
   prompt?: {
     description: string;
     arguments?: Array<{
@@ -17,7 +17,7 @@ export interface UnifiedTool {
       required: boolean;
     }>;
   };
-  
+
   execute: (args: ToolArguments, onProgress?: (newOutput: string) => void) => Promise<string>;
   category?: 'simple' | 'opencode' | 'utility';
 }
@@ -35,7 +35,7 @@ export function getToolDefinitions(): Tool[] { // get Tool definitions from regi
       properties: def.properties || {},
       required: def.required || [],
     };
-    
+
     return {
       name: tool.name,
       description: tool.description,
@@ -44,11 +44,11 @@ export function getToolDefinitions(): Tool[] { // get Tool definitions from regi
   });
 }
 
-function extractPromptArguments(zodSchema: ZodTypeAny): Array<{name: string; description: string; required: boolean}> {
+function extractPromptArguments(zodSchema: ZodTypeAny): Array<{ name: string; description: string; required: boolean }> {
   const jsonSchema = zodToJsonSchema(zodSchema) as any;
   const properties = jsonSchema.properties || {};
   const required = jsonSchema.required || [];
-  
+
   return Object.entries(properties).map(([name, prop]: [string, any]) => ({
     name,
     description: prop.description || `${name} parameter`,
@@ -68,9 +68,11 @@ export function getPromptDefinitions(): Prompt[] { // Helper to get MCP Prompt d
 
 export async function executeTool(toolName: string, args: ToolArguments, onProgress?: (newOutput: string) => void): Promise<string> {
   const tool = toolRegistry.find(t => t.name === toolName);
-  if (!tool) { throw new Error(`Unknown tool: ${toolName}`); } try { const validatedArgs = tool.zodSchema.parse(args);
+  if (!tool) { throw new Error(`Unknown tool: ${toolName}`); } try {
+    const validatedArgs = tool.zodSchema.parse(args);
     return tool.execute(validatedArgs, onProgress);
-  } catch (error) { if (error instanceof ZodError) {
+  } catch (error) {
+    if (error instanceof ZodError) {
       const issues = error.issues.map(issue => `${issue.path.join('.')}: ${issue.message}`).join(', ');
       throw new Error(`Invalid arguments for ${toolName}: ${issues}`);
     }
@@ -84,7 +86,7 @@ export function getPromptMessage(toolName: string, args: Record<string, any>): s
     throw new Error(`No prompt defined for tool: ${toolName}`);
   }
   const paramStrings: string[] = [];
-  
+
   if (args.prompt) {
     paramStrings.push(args.prompt);
   }
@@ -98,6 +100,6 @@ export function getPromptMessage(toolName: string, args: Record<string, any>): s
       }
     }
   });
-  
+
   return `Use the ${toolName} tool${paramStrings.length > 0 ? ': ' + paramStrings.join(' ') : ''}`;
 }

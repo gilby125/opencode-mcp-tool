@@ -1,8 +1,8 @@
 import { executeCommand } from './commandExecutor.js';
 import { Logger } from './logger.js';
-import { 
-  ERROR_MESSAGES, 
-  STATUS_MESSAGES, 
+import {
+  ERROR_MESSAGES,
+  STATUS_MESSAGES,
   CLI
 } from '../constants.js';
 import { getServerConfig } from '../index.js';
@@ -14,19 +14,19 @@ export async function executeOpenCodeCLI(
   onProgress?: (newOutput: string) => void
 ): Promise<string> {
   const serverConfig = getServerConfig();
-  
+
   const args: string[] = [CLI.SUBCOMMANDS.RUN];
-  
+
   // Use model from parameter or server config
   const useModel = model || serverConfig.primaryModel;
   args.push(CLI.FLAGS.MODEL, useModel);
-  
+
   // Add mode (now required)
   args.push(CLI.FLAGS.MODE, mode);
-  
+
   // Add prompt as positional argument (no -p flag in opencode)
   args.push(prompt);
-  
+
   try {
     return await executeCommand(CLI.COMMANDS.OPENCODE, args, onProgress);
   } catch (error) {
@@ -34,13 +34,13 @@ export async function executeOpenCodeCLI(
     if (errorMessage.toLowerCase().includes(ERROR_MESSAGES.QUOTA_EXCEEDED) && serverConfig.fallbackModel) {
       Logger.warn(`${ERROR_MESSAGES.QUOTA_EXCEEDED_SHORT} Trying fallback model: ${serverConfig.fallbackModel}`);
       await sendStatusMessage(STATUS_MESSAGES.FALLBACK_RETRY);
-      
+
       const fallbackArgs: string[] = [CLI.SUBCOMMANDS.RUN];
       fallbackArgs.push(CLI.FLAGS.MODEL, serverConfig.fallbackModel);
       fallbackArgs.push(CLI.FLAGS.MODE, mode);
-      
+
       fallbackArgs.push(prompt);
-      
+
       try {
         const result = await executeCommand(CLI.COMMANDS.OPENCODE, fallbackArgs, onProgress);
         Logger.warn(`Successfully executed with fallback model: ${serverConfig.fallbackModel}`);

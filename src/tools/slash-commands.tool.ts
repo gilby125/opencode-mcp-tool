@@ -1,8 +1,8 @@
 import { z } from 'zod';
 import { UnifiedTool } from './registry.js';
 import { executeOpenCodeCLI } from '../utils/opencodeExecutor.js';
-import { 
-  ERROR_MESSAGES, 
+import {
+  ERROR_MESSAGES,
   STATUS_MESSAGES
 } from '../constants.js';
 
@@ -14,23 +14,23 @@ const slashCommandArgsSchema = z.object({
 
 // Shared execution logic
 async function executeSlashCommand(
-  args: any, 
-  mode: string, 
+  args: any,
+  mode: string,
   onProgress?: (newOutput: string) => void
 ): Promise<string> {
   const { prompt, model } = args;
-  
-  if (!prompt?.trim()) { 
-    throw new Error(ERROR_MESSAGES.NO_PROMPT_PROVIDED); 
+
+  if (!prompt?.trim()) {
+    throw new Error(ERROR_MESSAGES.NO_PROMPT_PROVIDED);
   }
-  
+
   const result = await executeOpenCodeCLI(
     prompt as string,
     mode,
     model as string | undefined,
     onProgress
   );
-  
+
   return `${STATUS_MESSAGES.OPENCODE_RESPONSE}\n${result}`;
 }
 

@@ -18,21 +18,21 @@ export const timeoutTestTool: UnifiedTool = {
     const steps = Math.ceil(duration / 5000); // Progress every 5 seconds
     const stepDuration = duration / steps;
     const startTime = Date.now();
-    
+
     const results: string[] = [];
-    results.push(`Starting timeout test for ${duration}ms (${duration/1000}s)`);
-    
+    results.push(`Starting timeout test for ${duration}ms (${duration / 1000}s)`);
+
     for (let i = 1; i <= steps; i++) {
       await new Promise(resolve => setTimeout(resolve, stepDuration));
       const elapsed = Date.now() - startTime;
-      results.push(`Step ${i}/${steps} completed - Elapsed: ${Math.round(elapsed/1000)}s`);
+      results.push(`Step ${i}/${steps} completed - Elapsed: ${Math.round(elapsed / 1000)}s`);
     }
-    
+
     const totalElapsed = Date.now() - startTime;
     results.push(`\nTimeout test completed successfully!`);
     results.push(`Target duration: ${duration}ms`);
     results.push(`Actual duration: ${totalElapsed}ms`);
-    
+
     return results.join('\n');
   }
 };
