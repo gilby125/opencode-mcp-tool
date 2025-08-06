@@ -12,7 +12,7 @@ Once installed, here's how to get started with OpenCode MCP Tool.
 
 Analyze a single file:
 ```
-/opencode:analyze @README.md summarize this
+/opencode:plan @README.md summarize this
 ```
 
 ## Natural Language Usage
@@ -22,11 +22,18 @@ Just ask naturally:
 - "Ask opencode to analyze the architecture"
 - "Have opencode review this function"
 
-## Sandbox Testing
+## Planning Mode
 
-Test code safely:
+Structured analysis and planning:
 ```
-/opencode:sandbox create a Python script that generates fibonacci numbers
+/opencode:plan create a Python script that generates fibonacci numbers
+```
+
+## Build Mode
+
+Immediate execution:
+```
+/opencode:build create a simple Python hello world script
 ```
 
 ## Next Steps

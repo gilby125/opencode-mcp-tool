@@ -92,8 +92,7 @@ export const CLI = {
 export interface ToolArguments {
   prompt?: string;
   model?: string;
-  planMode?: boolean | string; // Renamed from sandbox
-  changeMode?: boolean | string;
+  mode?: string; // Generic mode parameter (plan, build, or custom)
   chunkIndex?: number | string; // Which chunk to return (1-based)
   chunkCacheKey?: string; // Optional cache key for continuation
   message?: string; // For Ping tool -- Un-used.

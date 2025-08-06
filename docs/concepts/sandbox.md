@@ -1,15 +1,15 @@
-# Sandbox Mode
+# Plan Mode
 
-Execute code safely in an isolated environment.
+Structured analysis and planning before code execution.
 
-## What is Sandbox Mode?
+## What is Plan Mode?
 
-Sandbox mode allows OpenCode to write and test code in a secure, isolated environment without affecting your system.
+Plan mode allows OpenCode to analyze your request and create structured plans before executing code, ensuring safer and more thoughtful development.
 
 ## Basic Usage
 
 ```
-/opencode:sandbox create a Python script that sorts a list
+/opencode:plan create a Python script that sorts a list
 ```
 
 ## How It Works
@@ -23,25 +23,25 @@ Sandbox mode allows OpenCode to write and test code in a secure, isolated enviro
 
 ### Algorithm Testing
 ```
-/opencode:sandbox implement and test quicksort in JavaScript
+/opencode:plan implement and test quicksort in JavaScript
 ```
 
 ### Data Processing
 ```
-/opencode:sandbox parse this CSV and show statistics: [data]
+/opencode:plan parse this CSV and show statistics: [data]
 ```
 
 ### Proof of Concepts
 ```
-/opencode:sandbox create a working web scraper example
+/opencode:plan create a working web scraper example
 ```
 
-## Safety Features
+## Planning Features
 
-- **Isolated Execution**: No access to your file system
-- **Resource Limits**: CPU and memory constraints
-- **Time Limits**: Prevents infinite loops
-- **No Network**: Cannot make external requests
+- **Structured Analysis**: Breaks down complex requests
+- **Safety Checks**: Reviews code before execution  
+- **Step-by-Step**: Clear implementation roadmap
+- **Best Practices**: Follows coding standards
 
 ## Supported Languages
 
@@ -81,26 +81,27 @@ add authentication to the API
 show example requests and responses
 ```
 
-## Limitations
+## Benefits
 
-- No file system access
-- No network requests
-- Limited execution time (30s)
-- Memory limit (512MB)
+- Thoughtful code architecture
+- Better error prevention
+- Clear implementation steps
+- Educational value
+- Security-focused approach
 
 ## Examples
 
 ### Testing Algorithms
 ```
-/opencode:sandbox benchmark bubble sort vs quick sort with 1000 items
+/opencode:plan benchmark bubble sort vs quick sort with 1000 items
 ```
 
 ### Learning Code
 ```
-/opencode:sandbox show me how promises work in JavaScript with examples
+/opencode:plan show me how promises work in JavaScript with examples
 ```
 
 ### Debugging
 ```
-/opencode:sandbox why does this code fail: [paste code]
+/opencode:plan why does this code fail: [paste code]
 ```

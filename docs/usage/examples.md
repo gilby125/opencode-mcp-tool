@@ -84,7 +84,7 @@ give me an overview of this project's architecture
 
 ### Understanding Concepts
 ```
-/opencode:sandbox show me how OAuth 2.0 works with a working example
+/opencode:plan show me how OAuth 2.0 works with a working example
 ```
 
 ### Best Practices

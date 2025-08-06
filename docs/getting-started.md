@@ -139,10 +139,10 @@ Type in Claude:
 
 ### 2. Test File Analysis
 ```
-/opencode:analyze @README.md summarize this file
+/opencode:plan @README.md summarize this file
 ```
 
-### 3. Test Sandbox Mode
+### 3. Test Plan Mode
 ```
 /opencode:plan create a simple Python hello world script
 ```
@@ -158,8 +158,8 @@ Once installed, you can use natural language or slash commands:
 
 ### Slash Commands in Claude Code
 Type `/opencode` and these commands will appear:
-- `/opencode:analyze` - Analyze files or ask questions
-- `/opencode:plan` - Structured analysis and planning
+- `/opencode:plan` - Structured analysis and planning (default mode)
+- `/opencode:build` - Immediate code execution
 - `/opencode:help` - Show help information
 - `/opencode:ping` - Test connectivity
 
@@ -197,7 +197,8 @@ npm install -g opencode
 
 Now that you're set up:
 - Learn about file analysis with @ syntax
-- Explore sandbox mode for safe code execution
+- Explore plan mode for structured development
+- Use build mode for immediate execution
 - Check out real-world examples in the README
 - Join the community for support
 

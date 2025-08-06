@@ -4,21 +4,20 @@ Complete list of available commands and their usage.
 
 ## Slash Commands
 
-### `/opencode:analyze`
-Analyze files or ask questions about code.
-
-```
-/opencode:analyze @file.js explain this code
-/opencode:analyze @src/*.ts find security issues
-/opencode:analyze how do I implement authentication?
-```
-
 ### `/opencode:plan`
-Execute code analysis in plan mode for structured thinking.
+Structured analysis and planning mode (default behavior).
 
 ```
 /opencode:plan create a Python fibonacci generator
 /opencode:plan test this function: [code]
+```
+
+### `/opencode:build`
+Immediate execution mode for direct implementation.
+
+```
+/opencode:build create a simple web server
+/opencode:build implement this API endpoint: [spec]
 ```
 
 ### `/opencode:help`
@@ -43,7 +42,7 @@ Test connectivity with OpenCode.
 /opencode:<tool> [options] <arguments>
 ```
 
-- **tool**: The action to perform (analyze, plan, help, ping)
+- **tool**: The action to perform (plan, build, help, ping)
 - **options**: Optional flags (coming soon)
 - **arguments**: Input text, files, or questions
 
@@ -86,17 +85,17 @@ Instead of slash commands, you can use natural language:
 
 ### Combining Files and Questions
 ```
-/opencode:analyze @package.json @src/index.js is the entry point configured correctly?
+/opencode:plan @package.json @src/index.js is the entry point configured correctly?
 ```
 
 ### Complex Queries
 ```
-/opencode:analyze @src/**/*.js @test/**/*.test.js what's the test coverage?
+/opencode:plan @src/**/*.js @test/**/*.test.js what's the test coverage?
 ```
 
 ### Code Generation
 ```
-/opencode:analyze @models/user.js generate TypeScript types for this model
+/opencode:build @models/user.js generate TypeScript types for this model
 ```
 
 ## Tips

@@ -17,7 +17,7 @@ Say:
 - "Have opencode analyze the main application file"
 
 ### Code Generation
-Instead of: `/opencode:sandbox create a web server`
+Instead of: `/opencode:plan create a web server`
 
 Say:
 - "Get opencode to create a simple web server"
