@@ -1,9 +1,9 @@
-import { z } from 'zod';
-import { UnifiedTool } from './registry.js';
-import { executeCommand } from '../utils/commandExecutor.js';
+import { z } from "zod";
+import { UnifiedTool } from "./registry.js";
+import { executeCommand } from "../utils/commandExecutor.js";
 
 const pingArgsSchema = z.object({
-  prompt: z.string().default('').describe("Message to echo "),
+  prompt: z.string().default("").describe("Message to echo "),
 });
 
 export const pingTool: UnifiedTool = {
@@ -13,11 +13,11 @@ export const pingTool: UnifiedTool = {
   prompt: {
     description: "Echo test message with structured response.",
   },
-  category: 'simple',
+  category: "simple",
   execute: async (args, onProgress) => {
     const message = args.prompt || args.message || "Pong!";
     return executeCommand("echo", [message as string], onProgress);
-  }
+  },
 };
 
 const helpArgsSchema = z.object({});
@@ -29,8 +29,8 @@ export const helpTool: UnifiedTool = {
   prompt: {
     description: "receive help information",
   },
-  category: 'simple',
+  category: "simple",
   execute: async (args, onProgress) => {
-    return executeCommand("gemini", ["-help"], onProgress);
-  }
+    return executeCommand("opencode", ["--help"], onProgress);
+  },
 };
