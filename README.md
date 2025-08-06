@@ -147,8 +147,6 @@ These tools are designed to be used by the AI assistant.
 
 You can use these commands directly in Claude Code's interface (compatibility with other clients has not been tested).
 
-- **/analyze**: Analyzes files or directories using OpenCode, or asks general questions.
-  - **`prompt`** (required): The analysis prompt. Use `@` syntax to include files (e.g., `/analyze prompt:@src/ summarize this directory`) or ask general questions (e.g., `/analyze prompt:Please use a web search to find the latest news stories`).
 - **/plan**: Uses plan mode for structured analysis and safer operations.
   - **`prompt`** (required): Analysis request (e.g., `/plan prompt:Create and run a Python script that processes CSV data` or `/plan prompt:@script.py Analyze this script safely`).
 - **/help**: Displays the OpenCode CLI help information.

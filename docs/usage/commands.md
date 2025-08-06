@@ -25,7 +25,7 @@ Show help information and available tools.
 
 ```
 /opencode:help
-/opencode:help analyze
+/opencode:help ask-opencode
 ```
 
 ### `/opencode:ping`

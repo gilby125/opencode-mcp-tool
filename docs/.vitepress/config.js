@@ -41,7 +41,7 @@ export default withMermaid(
           { text: 'How It Works', link: '/concepts/how-it-works' },
           { text: 'File Analysis (@)', link: '/concepts/file-analysis' },
           { text: 'Model Selection', link: '/concepts/models' },
-          { text: 'Sandbox Mode', link: '/concepts/sandbox' }
+          { text: 'Plan Mode', link: '/concepts/plan-mode' }
         ]
       },
       {
