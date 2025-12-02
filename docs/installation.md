@@ -17,7 +17,7 @@ No installation needed - runs directly:
   "mcpServers": {
     "opencode": {
       "command": "npx",
-      "args": ["-y", "opencode-mcp-tool"]
+      "args": ["-y", "@gilby125/opencode-mcp-tool"]
     }
   }
 }
@@ -26,7 +26,7 @@ No installation needed - runs directly:
 ## Method 2: Global Installation
 
 ```bash
-claude mcp add opencode -- npx -y opencode-mcp-tool
+claude mcp add opencode -- npx -y @gilby125/opencode-mcp-tool
 ```
 
 Then configure:
@@ -42,8 +42,6 @@ Then configure:
 
 ## Method 3: Local Project
 
-```bash
-npm install opencode-mcp-tool
-```
+Use GitHub Packages or npm with the scoped name: `@gilby125/opencode-mcp-tool`.
 
 See [Getting Started](/getting-started) for full setup instructions.

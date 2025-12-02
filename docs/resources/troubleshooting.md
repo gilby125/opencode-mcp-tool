@@ -32,14 +32,14 @@ If you still get "command not found", restart your terminal or add npm global bi
 
 ```bash
 # Method 1: Install globally first
-npm install -g opencode-mcp-tool
-claude mcp add opencode -- opencode-mcp-tool
+npm install -g @gilby125/opencode-mcp-tool
+claude mcp add opencode -- opencode-mcp
 
 # Method 2: Use --yes instead of -y
-claude mcp add opencode -- npx --yes opencode-mcp-tool
+claude mcp add opencode -- npx --yes @gilby125/opencode-mcp-tool
 
 # Method 3: Remove the -y flag entirely
-claude mcp add opencode -- npx opencode-mcp-tool
+claude mcp add opencode -- npx @gilby125/opencode-mcp-tool
 ```
 
 ### "MCP server not responding"
@@ -86,8 +86,8 @@ node --version
 opencode "Hello"
 
 # 3. Reinstall if needed
-npm uninstall -g opencode-mcp-tool
-npm install -g opencode-mcp-tool
+npm uninstall -g @gilby125/opencode-mcp-tool
+npm install -g @gilby125/opencode-mcp-tool
 
 # 4. Verify Claude Code can find the command
 claude mcp list
@@ -192,8 +192,8 @@ Enable debug logging:
 
 ```bash
 # Remove and reinstall
-npm uninstall -g opencode-mcp-tool
-npm install -g opencode-mcp-tool
+npm uninstall -g @gilby125/opencode-mcp-tool
+npm install -g @gilby125/opencode-mcp-tool
 
 # Reset OpenCode CLI
 opencode config reset

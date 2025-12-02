@@ -33,7 +33,7 @@ Claude Code offers the smoothest experience.
 
 ```bash
 # install for claude code
-claude mcp add opencode -- npx -y opencode-mcp-tool
+claude mcp add opencode -- npx -y @gilby125/opencode-mcp-tool
 
 # Start Claude Code - it's automatically configured!
 claude
@@ -58,7 +58,7 @@ For Claude Desktop users, add this to your configuration file:
   "mcpServers": {
     "opencode": {
       "command": "npx",
-      "args": ["-y", "opencode-mcp-tool"]
+      "args": ["-y", "@gilby125/opencode-mcp-tool"]
     }
   }
 }
@@ -75,7 +75,7 @@ OpenCode MCP Tool works with 40+ MCP clients! Here are the common configuration 
   "transport": {
     "type": "stdio",
     "command": "npx",
-    "args": ["-y", "opencode-mcp-tool"]
+    "args": ["-y", "@gilby125/opencode-mcp-tool"]
   }
 }
 ```
@@ -93,7 +93,7 @@ OpenCode MCP Tool works with 40+ MCP clients! Here are the common configuration 
     "command": "npx",
     "args": [
       "-y",
-      "opencode-mcp-tool"
+      "@gilby125/opencode-mcp-tool"
     ],
     "env": {},
     "working_directory": null,
@@ -111,7 +111,7 @@ OpenCode MCP Tool works with 40+ MCP clients! Here are the common configuration 
 **Quick setup (recommended):**
 
 ```bash
-codex mcp add opencode -- npx -y opencode-mcp-tool -- --model google/gemini-2.5-pro --fallback-model google/gemini-2.5-flash
+codex mcp add opencode -- npx -y @gilby125/opencode-mcp-tool -- --model google/gemini-2.5-pro --fallback-model google/gemini-2.5-flash
 ```
 
 This registers `opencode` as an MCP server using stdio transport. Once added, start Codex CLI normally and use natural language like:

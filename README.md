@@ -22,7 +22,7 @@ Before using this tool, ensure you have:
 ### One-Line Setup (Claude Code)
 
 ```bash
-claude mcp add opencode -- npx -y opencode-mcp-tool -- --model google/gemini-2.5-pro
+claude mcp add opencode -- npx -y @gilby125/opencode-mcp-tool -- --model google/gemini-2.5-pro
 ```
 
 ### Codex CLI Setup
@@ -30,7 +30,7 @@ claude mcp add opencode -- npx -y opencode-mcp-tool -- --model google/gemini-2.5
 If you're using the OpenAI Codex CLI as your MCP client, add this server with:
 
 ```bash
-codex mcp add opencode -- npx -y opencode-mcp-tool -- --model google/gemini-2.5-pro --fallback-model google/gemini-2.5-flash
+codex mcp add opencode -- npx -y @gilby125/opencode-mcp-tool -- --model google/gemini-2.5-pro --fallback-model google/gemini-2.5-flash
 ```
 
 After that, start Codex CLI as usual and you can talk to OpenCode via natural language (for example, "use opencode to explain index.html") and let Codex call the MCP tools when helpful.
@@ -49,7 +49,7 @@ If you already have it configured in Claude Desktop:
 ```json
 "opencode": {
   "command": "npx",
-  "args": ["-y", "opencode-mcp-tool", "--", "--model", "google/gemini-2.5-pro"]
+  "args": ["-y", "@gilby125/opencode-mcp-tool", "--", "--model", "google/gemini-2.5-pro"]
 }
 ```
 
@@ -71,7 +71,7 @@ Add this configuration to your Claude Desktop config file:
   "mcpServers": {
     "opencode": {
       "command": "npx",
-      "args": ["-y", "opencode-mcp-tool", "--", "--model", "google/gemini-2.5-pro", "--fallback-model", "google/gemini-2.5-flash"]
+      "args": ["-y", "@gilby125/opencode-mcp-tool", "--", "--model", "google/gemini-2.5-pro", "--fallback-model", "google/gemini-2.5-flash"]
     }
   }
 }
@@ -118,6 +118,24 @@ After updating the Codex config, restart `codex` and test with a command such as
   - **Linux**: `~/.config/claude/claude_desktop_config.json`
 
 After updating the configuration, restart your terminal session.
+
+### Publishing via GitHub Packages (npm)
+
+This package is configured to publish to the GitHub npm registry under the scoped name `@gilby125/opencode-mcp-tool`.
+
+To install it from GitHub Packages, configure your `~/.npmrc`:
+
+```ini
+@gilby125:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=YOUR_GITHUB_PAT
+```
+
+Then install globally or use `npx`:
+
+```bash
+npm install -g @gilby125/opencode-mcp-tool
+npx -y @gilby125/opencode-mcp-tool -- --model google/gemini-2.5-pro
+```
 
 ## Example Workflow
 
