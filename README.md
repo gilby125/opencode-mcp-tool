@@ -92,6 +92,24 @@ If you installed globally, use this configuration instead:
 }
 ```
 
+### Codex CLI Configuration
+
+To use this server with the OpenAI Codex CLI, add the following to your `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.opencode]
+command = "opencode-mcp"
+args = ["--model", "google/gemini-2.5-pro", "--fallback-model", "google/gemini-2.5-flash"]
+startup_timeout_sec = 20
+tool_timeout_sec = 300
+```
+
+After updating the Codex config, restart `codex` and test with a command such as:
+
+```text
+/opencode:ping "Hello from OpenCode MCP!"
+```
+
 **Configuration File Locations:**
 
 - **Claude Desktop**:
