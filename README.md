@@ -119,24 +119,6 @@ After updating the Codex config, restart `codex` and test with a command such as
 
 After updating the configuration, restart your terminal session.
 
-### Publishing via GitHub Packages (npm)
-
-This package is configured to publish to the GitHub npm registry under the scoped name `@gilby125/opencode-mcp-tool`.
-
-To install it from GitHub Packages, configure your `~/.npmrc`:
-
-```ini
-@gilby125:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=YOUR_GITHUB_PAT
-```
-
-Then install globally or use `npx`:
-
-```bash
-npm install -g @gilby125/opencode-mcp-tool
-npx -y @gilby125/opencode-mcp-tool -- --model google/gemini-2.5-pro
-```
-
 ## Example Workflow
 
 - **Natural language**: "use opencode to explain index.html", "understand the massive project using opencode", "ask opencode to search for latest news"
