@@ -6,22 +6,22 @@ export const LOG_PREFIX = "[OMCPT]";
 // Error messages
 export const ERROR_MESSAGES = {
   QUOTA_EXCEEDED: "quota exceeded",
-  QUOTA_EXCEEDED_SHORT: "⚠️ Model quota exceeded. Switching to fallback model if available.",
+  QUOTA_EXCEEDED_SHORT: "Model quota exceeded. Switching to fallback model if available.",
   TOOL_NOT_FOUND: "not found in registry",
   NO_PROMPT_PROVIDED: "Please provide a prompt for analysis. Use @ syntax to include files (e.g., '@largefile.js explain what this does') or ask general questions",
 } as const;
 
 // Status messages
 export const STATUS_MESSAGES = {
-  QUOTA_SWITCHING: "🚫 Model quota exceeded, switching to fallback model...",
-  FALLBACK_RETRY: "⚡ Retrying with fallback model...",
-  FALLBACK_SUCCESS: "✅ Fallback model completed successfully",
-  PLAN_MODE_EXECUTING: "📋 Executing OpenCode command in plan mode...",
+  QUOTA_SWITCHING: "Model quota exceeded, switching to fallback model...",
+  FALLBACK_RETRY: "Retrying with fallback model...",
+  FALLBACK_SUCCESS: "Fallback model completed successfully.",
+  PLAN_MODE_EXECUTING: "Executing OpenCode command in plan mode...",
   OPENCODE_RESPONSE: "OpenCode response:",
   // Timeout prevention messages
-  PROCESSING_START: "🔍 Starting analysis (may take 5-15 minutes for large codebases)",
-  PROCESSING_CONTINUE: "⏳ Still processing... OpenCode is working on your request",
-  PROCESSING_COMPLETE: "✅ Analysis completed successfully",
+  PROCESSING_START: "Starting analysis (may take 5-15 minutes for large codebases).",
+  PROCESSING_CONTINUE: "Still processing. OpenCode is working on your request.",
+  PROCESSING_COMPLETE: "Analysis completed successfully.",
 } as const;
 
 // MCP Protocol Constants

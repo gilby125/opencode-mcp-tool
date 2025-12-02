@@ -111,10 +111,10 @@ claude mcp list
 **Solutions**:
 
 ```bash
-# The tool automatically prevents timeouts with progress updates
+# The tool automatically prevents timeouts with progress updates.
 # You'll see messages like:
-# "🔍 Starting analysis (may take 5-15 minutes for large codebases)"
-# "🧠 Gemini is analyzing your request..."
+# "Starting analysis (may take 5-15 minutes for large codebases)."
+# "Gemini is analyzing your request..."
 
 # Use a faster model for large requests
 /opencode:plan -m <model> @large-file.js
@@ -142,10 +142,10 @@ claude mcp list
 
 ```bash
 # The tool will automatically send progress messages like:
-# "🔍 Starting analysis (may take 5-15 minutes for large codebases)"
-# "🧠 OpenCode is analyzing your request..."
-# "📊 Processing files and generating insights..."
-# "⏳ Still processing... OpenCode is working on your request"
+# "Starting analysis (may take 5-15 minutes for large codebases)."
+# "OpenCode is analyzing your request..."
+# "Processing files and generating insights..."
+# "Still processing... OpenCode is working on your request."
 ```
 
 **What happens during long operations**:
@@ -181,7 +181,7 @@ Enable debug logging:
 
 ## Getting Help
 
-1. Check [GitHub Issues](https://github.com/frap129/opencode-mcp-tool/issues)
+1. Check GitHub issues for this repository
 2. Enable debug mode
 3. Collect error logs
 4. Open a new issue with details

@@ -159,20 +159,20 @@ Always include full error messages and stack traces when debugging.
 ## Common Pitfalls to Avoid
 
 ### 1. Over-broad Queries
-❌ `@**/* "fix all issues"`
-✅ `@src/auth/*.js "fix security issues in authentication"`
+- Avoid: `@**/* "fix all issues"`
+- Prefer: `@src/auth/*.js "fix security issues in authentication"`
 
 ### 2. Missing Context
-❌ `"why doesn't this work?"`
-✅ `@error.log @config.js "why doesn't database connection work?"`
+- Avoid: `"why doesn't this work?"`
+- Prefer: `@error.log @config.js "why doesn't database connection work?"`
 
 ### 3. Ignoring Model Limits
-❌ Trying to analyze 5M tokens with Flash model
-✅ Using Pro for large codebases, Flash for single files
+- Avoid: Trying to analyze 5M tokens with a fast but limited model
+- Prefer: Using Pro for large codebases, Flash for single files
 
 ### 4. Vague Success Criteria
-❌ "make it better"
-✅ "improve performance to handle 1000 requests/second"
+- Avoid: "make it better"
+- Prefer: "improve performance to handle 1000 requests/second"
 
 ## Workflow Integration
 

@@ -13,7 +13,7 @@
     "dev": "tsc && node dist/index.js",
     "test": "echo \"No tests yet\" && exit 0",
     "lint": "tsc --noEmit",
-    "prepublishOnly": "echo '⚠️  Remember to test locally first!' && npm run build"
+    "prepublishOnly": "echo 'Remember to test locally first.' && npm run build"
   },
   "keywords": [
     "mcp",
@@ -23,16 +23,16 @@
     "ai",
     "llm"
   ],
-  "author": "frap129",
+  "author": "gilby125",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/frap129/opencode-mcp-tool.git"
+    "url": "git+https://github.com/gilby125/opencode-mcp-tool.git"
   },
   "bugs": {
-    "url": "https://github.com/frap129/opencode-mcp-tool/issues"
+    "url": "https://github.com/gilby125/opencode-mcp-tool/issues"
   },
-  "homepage": "https://github.com/frap129/opencode-mcp-tool#readme",
+  "homepage": "https://github.com/gilby125/opencode-mcp-tool#readme",
   "engines": {
     "node": ">=16.0.0"
   },

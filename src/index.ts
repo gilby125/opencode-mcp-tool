@@ -101,11 +101,11 @@ function startProgressUpdates(
   latestOutput = ""; // Reset latest output
 
   const progressMessages = [
-    `🧠 ${operationName} - OpenCode is analyzing your request...`,
-    `📊 ${operationName} - Processing files and generating insights...`,
-    `✨ ${operationName} - Creating structured response for your review...`,
-    `⏱️ ${operationName} - Large analysis in progress (this is normal for big requests)...`,
-    `🔍 ${operationName} - Still working... OpenCode takes time for quality results...`,
+    `${operationName} - OpenCode is analyzing your request...`,
+    `${operationName} - Processing files and generating insights...`,
+    `${operationName} - Creating a structured response for your review...`,
+    `${operationName} - Large analysis in progress (this is normal for big requests)...`,
+    `${operationName} - Still working... OpenCode takes time for quality results...`,
   ];
 
   let messageIndex = 0;
@@ -117,7 +117,7 @@ function startProgressUpdates(
       progressToken,
       0,
       undefined, // No total - indeterminate progress
-      `🔍 Starting ${operationName}`
+      `Starting ${operationName}`
     );
   }
 
@@ -131,7 +131,7 @@ function startProgressUpdates(
       const baseMessage = progressMessages[messageIndex % progressMessages.length];
       const outputPreview = latestOutput.slice(-150).trim(); // Last 150 chars
       const message = outputPreview
-        ? `${baseMessage}\n📝 Output: ...${outputPreview}`
+        ? `${baseMessage}\nOutput preview: ...${outputPreview}`
         : baseMessage;
 
       await sendProgressNotification(
@@ -164,7 +164,7 @@ function stopProgressUpdates(
       progressData.progressToken,
       100,
       100,
-      success ? `✅ ${operationName} completed successfully` : `❌ ${operationName} failed`
+      success ? `${operationName} completed successfully.` : `${operationName} failed.`
     );
   }
 }

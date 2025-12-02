@@ -45,25 +45,25 @@ Claude recognizes these patterns:
 ## Best Practices
 
 ### 1. Be Conversational
-```
-❌ /opencode:analyze @config.json validate
+Avoid purely command-style requests:
+`/opencode:analyze @config.json validate`
 
-✅ "Hey, can opencode check if my config.json is valid?"
-```
+Prefer natural language:
+`"Hey, can opencode check if my config.json is valid?"`
 
 ### 2. Provide Context
-```
-❌ "analyze the bug"
+Avoid vague instructions:
+`"analyze the bug"`
 
-✅ "OpenCode, I'm getting a null pointer error in my auth handler, can you help?"
-```
+Prefer detailed questions:
+`"OpenCode, I'm getting a null pointer error in my auth handler, can you help?"`
 
 ### 3. Specify Files Naturally
-```
-❌ @src/utils.js @src/helpers.js relationship
+Avoid bare file lists:
+`@src/utils.js @src/helpers.js relationship`
 
-✅ "How do utils.js and helpers.js work together? Ask opencode."
-```
+Prefer descriptive questions:
+`"How do utils.js and helpers.js work together? Ask opencode."`
 
 ## Common Patterns
 
@@ -100,4 +100,3 @@ Claude understands the context and uses the appropriate tool.
 4. **No Memorization**: Use whatever feels natural
 
 Remember: The goal is to make AI assistance feel natural, not robotic!
-

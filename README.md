@@ -1,26 +1,16 @@
 
 # OpenCode MCP Tool
 
-<div align="center">
-
-[![GitHub Release](https://img.shields.io/github/v/release/frap129/opencode-mcp-tool?logo=github&label=GitHub)](https://github.com/frap129/opencode-mcp-tool/releases)
-[![npm version](https://img.shields.io/npm/v/opencode-mcp-tool)](https://www.npmjs.com/package/opencode-mcp-tool)
-[![npm downloads](https://img.shields.io/npm/dt/opencode-mcp-tool)](https://www.npmjs.com/package/opencode-mcp-tool)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Open Source](https://img.shields.io/badge/Open%20Source-❤️-red.svg)](https://github.com/frap129/opencode-mcp-tool)
-
-</div>
-
-> 📚 **Documentation Available in docs/ folder** - Examples, FAQ, Troubleshooting, Best Practices
+> **Documentation available in `docs/`** – Examples, FAQ, troubleshooting, best practices
 
 This is a Model Context Protocol (MCP) server that allows AI assistants to interact with the [OpenCode CLI](https://github.com/fictiverse/opencode). It enables AI assistants to leverage multiple AI models through a unified interface, with features like plan mode for structured thinking and extensive model selection.
 
 - Ask questions through multiple AI models via Claude or other MCP clients
 - Use plan mode for structured analysis and safer operations
 
-## TLDR: [![Claude](https://img.shields.io/badge/Claude-D97757?logo=claude&logoColor=fff)](#) + Multiple AI Models via OpenCode
+## TLDR
 
-**Goal**: Use OpenCode's multi-model capabilities directly in Claude Code with flexible model selection and plan mode features.
+Use OpenCode's multi-model capabilities directly in Claude Code with flexible model selection and plan mode features.
 
 ## Prerequisites
 
@@ -29,11 +19,21 @@ Before using this tool, ensure you have:
 1. **[Node.js](https://nodejs.org/)** (v16.0.0 or higher)
 2. **[OpenCode CLI](https://github.com/fictiverse/opencode)** installed and configured
 
-### One-Line Setup
+### One-Line Setup (Claude Code)
 
 ```bash
 claude mcp add opencode -- npx -y opencode-mcp-tool -- --model google/gemini-2.5-pro
 ```
+
+### Codex CLI Setup
+
+If you're using the OpenAI Codex CLI as your MCP client, add this server with:
+
+```bash
+codex mcp add opencode -- npx -y opencode-mcp-tool -- --model google/gemini-2.5-pro --fallback-model google/gemini-2.5-flash
+```
+
+After that, start Codex CLI as usual and you can talk to OpenCode via natural language (for example, "use opencode to explain index.html") and let Codex call the MCP tools when helpful.
 
 ### Verify Installation
 

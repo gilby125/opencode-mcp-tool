@@ -6,12 +6,12 @@ The opencode-mcp-tool is designed to seamlessly integrate into your natural work
 
 Claude automatically decides when to use `ask-opencode` based on context:
 
-- `🔍 comparative analysis` - different AI perspectives for validation
-- `🛠️ leveraging extra tools` - OpenCode's search and memory functions  
-- `📋 code review & big changes` - second opinions on implementation
-- `💡 creative problem solving` - brainstorming and ideation
+- Comparative analysis – different AI perspectives for validation
+- Leveraging extra tools – OpenCode search and memory functions  
+- Code review and big changes – second opinions on implementation
+- Creative problem solving – brainstorming and ideation
 
-This intelligent selection enhances your workflow exactly when OpenCode's capabilities add value.
+This selection enhances your workflow when OpenCode's capabilities add value.
 
 ## Workflow Diagram
 

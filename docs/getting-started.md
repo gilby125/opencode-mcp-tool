@@ -2,16 +2,16 @@
 
 ## Client Options
 
-### ❋ Claude Code (Recommended)
+### Claude Code (Recommended)
 **Power Users** - One-command setup  
 [Get Started →](#claude-code-recommended)
 
-### 🖥️ Claude Desktop  
+### Claude Desktop  
 **Everyday users** - JSON configuration  
 [Setup Guide →](#claude-desktop)
 
-### 📂 Other Clients
-**40+ Options** - Warp, Copilot, and More  
+### Other Clients
+Multiple options including Warp, Copilot, and others  
 [More →](#other-mcp-clients)
 
 ## Client Setup
@@ -104,6 +104,21 @@ OpenCode MCP Tool works with 40+ MCP clients! Here are the common configuration 
 
 **Features:** Terminal-native MCP integration, AI-powered command suggestions
 </details>
+
+<details>
+<summary><strong>Codex CLI</strong> - OpenAI terminal assistant with MCP support</summary>
+
+**Quick setup (recommended):**
+
+```bash
+codex mcp add opencode -- npx -y opencode-mcp-tool -- --model google/gemini-2.5-pro --fallback-model google/gemini-2.5-flash
+```
+
+This registers `opencode` as an MCP server using stdio transport. Once added, start Codex CLI normally and use natural language like:
+
+- "use opencode to analyze @src/main.ts"
+- "ask opencode to summarize @. the current directory"
+</details>
 ### Generic Setup Steps
 
 1. **Install Prerequisites**: Ensure [OpenCode CLI](https://github.com/fictiverse/opencode) is installed
@@ -165,7 +180,7 @@ npm install -g opencode
 ```
 
 ### "MCP server not responding"
-0. run claude code --> /doctor
+0. Run Claude Code and use `/doctor`
 1. Check your configuration file path
 2. Ensure JSON syntax is correct
 3. Restart your MCP client completely
@@ -183,6 +198,5 @@ Now that you're set up:
 - Explore plan mode for structured development
 - Use build mode for immediate execution
 - Check out real-world examples in the README
-- Join the community for support
 
-**Need Help?** If you run into issues, [open an issue](https://github.com/frap129/opencode-mcp-tool/issues) on GitHub.
+**Need Help?** If you run into issues, open a GitHub issue in the main repository.
